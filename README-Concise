@@ -1,0 +1,84 @@
+````
+# Threshold Audit
+Lightweight, zero‑dependency Python tool for **calibration‑based threshold auditing**: fix threshold on clean calibration set, then evaluate on held‑out test data. Designed for anomaly detection, security scoring and binary classification experiments. No model training, no novel statistical algorithms.
+
+## Quick Start
+Python 3.10+. Run directly from repository:
+```bash
+python -m threshold_audit examples/synthetic.csv --direction higher --target-fpr 0.1 --output audit-report
+python -m unittest discover -s tests -v
+````
+
+Local install: `python -m pip install .` and use command `threshold-audit`. Not available on PyPI.
+
+**Output files**
+
+- `report.json`: full config, metrics, confidence intervals, input SHA‑256 hash
+- `metrics.csv`: overall and per‑group test metrics
+- `report.md`: human‑readable summary
+
+> Deterministic: same input & config produce byte‑identical reports, no runtime timestamp.
+
+Python API example:
+
+```
+from threshold_audit import audit, read_csv
+
+res = audit(read_csv("examples/synthetic.csv"),
+            target_fpr=0.1,
+            direction="higher",
+            comparison="strict")
+print(res["threshold"], res["overall"])
+```
+
+## Input Format
+
+Mandatory CSV columns:
+
+|Field|Description|
+|---|---|
+|`sample_id`|Unique non‑empty sample identifier|
+|`score`|Finite float detection score|
+|`label`|`0` (negative/clean), `1` (positive)|
+|`split`|`calibration` / `test`|
+|`group`|Optional grouping key|
+
+Constraints:
+
+- `calibration` split **must contain only label‑0 samples** and cannot be empty; test split must be non‑empty.
+- Duplicate IDs, NaN/infinite scores and malformed rows trigger errors.
+- Extra columns are ignored. Prevent dataset leakage when building splits.
+
+## Threshold Logic
+
+- `--direction higher`: higher score = suspicious; `lower`: lower score = suspicious
+- `strict`: `>` / `<`; `inclusive`: `>=` / `<=`
+- Threshold calculated from calibration‑set negatives using order‑statistics to satisfy target FPR budget.
+- ⚠️ **Test‑set data/labels are never used for threshold selection**. Empirical test‑set FPR may differ from target FPR.
+
+## Statistics & Caveats
+
+- Output: TP, FP, TN, FN, FPR, TPR for global and per‑group; missing classes yield `null` metrics.
+- Default 95% two‑sided Wilson score confidence intervals (`--confidence` to adjust).
+
+Important notes:
+
+1. Calibration‑set intervals are descriptive only, as threshold is fitted on this data.
+2. Intervals are marginal (not simultaneous). Correlated observations and distribution shift break statistical guarantees.
+3. This is an empirical audit tool, **not population‑FPR guarantee, conformal procedure or fairness certification**.
+
+## 中文简述
+
+轻量无依赖阈值审计工具，仅使用纯负样本校准集确定阈值，固定后在独立测试集评估指标与Wilson置信区间，适用于异常检测、安全评分二分类实验。
+
+- calibration分组只能放入负样本，阈值不依赖测试集。
+- 目标FPR仅约束校准集，不保证线上真实误报率。
+
+## Contributing
+
+Bug fixes, edge‑case tests and report improvements are welcome. Please provide minimal synthetic reproduction.
+
+- Keep core zero‑dependency; model training and dashboards are out of scope.
+- Do not submit private data, credentials or identifiable sample records.
+
+License: MIT ([LICENSE](https://www.doubao.com/chat/LICENSE))
