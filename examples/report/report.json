@@ -1,0 +1,96 @@
+{
+  "assumptions": [
+    "Target FPR is empirical on calibration, not a population or test guarantee.",
+    "Wilson intervals assume independent Bernoulli observations and a fixed threshold on held-out test data.",
+    "Calibration intervals are descriptive only: threshold selection uses these same observations.",
+    "Group intervals are marginal, not simultaneous; correlated samples invalidate nominal coverage.",
+    "Unique IDs detect exact ID overlap, not duplicated content or hidden dependence."
+  ],
+  "calibration": {
+    "fn": 0,
+    "fp": 1,
+    "fpr": 0.1,
+    "fpr_ci": [
+      0.017876213095072896,
+      0.40415002679523837
+    ],
+    "n": 10,
+    "negatives": 10,
+    "positives": 0,
+    "tn": 9,
+    "tp": 0,
+    "tpr": null,
+    "tpr_ci": null
+  },
+  "calibration_fp_budget": 1,
+  "config": {
+    "comparison": "strict",
+    "confidence": 0.95,
+    "direction": "higher",
+    "target_fpr": 0.1
+  },
+  "groups": {
+    "A": {
+      "fn": 1,
+      "fp": 1,
+      "fpr": 0.5,
+      "fpr_ci": [
+        0.09453120573423074,
+        0.9054687942657693
+      ],
+      "n": 4,
+      "negatives": 2,
+      "positives": 2,
+      "tn": 1,
+      "tp": 1,
+      "tpr": 0.5,
+      "tpr_ci": [
+        0.09453120573423074,
+        0.9054687942657693
+      ]
+    },
+    "B": {
+      "fn": 0,
+      "fp": 0,
+      "fpr": 0.0,
+      "fpr_ci": [
+        0.0,
+        0.6576197724933468
+      ],
+      "n": 4,
+      "negatives": 2,
+      "positives": 2,
+      "tn": 2,
+      "tp": 2,
+      "tpr": 1.0,
+      "tpr_ci": [
+        0.3423802275066532,
+        1.0
+      ]
+    }
+  },
+  "input_sha256": "e0a6395610cf6feee9c0f172e6f01350b87a78b00535e4fe2ffdcc8affed9a5f",
+  "operator": ">",
+  "overall": {
+    "fn": 1,
+    "fp": 1,
+    "fpr": 0.25,
+    "fpr_ci": [
+      0.0455872608097006,
+      0.699358157417598
+    ],
+    "n": 8,
+    "negatives": 4,
+    "positives": 4,
+    "tn": 3,
+    "tp": 3,
+    "tpr": 0.75,
+    "tpr_ci": [
+      0.300641842582402,
+      0.9544127391902995
+    ]
+  },
+  "schema_version": 1,
+  "threshold": 0.8,
+  "tool_version": "0.1.0"
+}
