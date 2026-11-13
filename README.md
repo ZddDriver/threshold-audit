@@ -69,3 +69,11 @@ For the included example, target 0.1 selects `score > 0.8`; calibration FP = 1/1
 Bug fixes, boundary-case tests and clearer reports are welcome. Please include a minimal synthetic reproduction and run the tests. Do not include private research data, credentials, or identifying sample records in issues. Keep the core small and dependency-free; model training and dashboards are out of scope.
 
 MIT licensed. See [LICENSE](LICENSE).
+
+
+## Contributors and acknowledgments
+
+- [@rangerhu](https://github.com/rangerhu): contributed the Chinese README in [PR #1](https://github.com/ZddDriver/threshold-audit/pull/1).
+- [@GShaol](https://github.com/GShaol): acknowledged as a project community supporter.
+
+感谢两位参与项目交流与支持。
