@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "threshold-audit"
+version = "0.1.0"
+description = "Reproducible empirical threshold calibration and held-out group audits"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+threshold-audit = "threshold_audit.__main__:main"
+
+[tool.setuptools]
+packages = ["threshold_audit"]
