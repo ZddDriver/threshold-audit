@@ -1,4 +1,3 @@
-````
 # Threshold Audit
 Lightweight, zero‑dependency Python tool for **calibration‑based threshold auditing**: fix threshold on clean calibration set, then evaluate on held‑out test data. Designed for anomaly detection, security scoring and binary classification experiments. No model training, no novel statistical algorithms.
 
@@ -7,7 +6,7 @@ Python 3.10+. Run directly from repository:
 ```bash
 python -m threshold_audit examples/synthetic.csv --direction higher --target-fpr 0.1 --output audit-report
 python -m unittest discover -s tests -v
-````
+```
 
 Local install: `python -m pip install .` and use command `threshold-audit`. Not available on PyPI.
 
@@ -81,4 +80,4 @@ Bug fixes, edge‑case tests and report improvements are welcome. Please provide
 - Keep core zero‑dependency; model training and dashboards are out of scope.
 - Do not submit private data, credentials or identifiable sample records.
 
-License: MIT ([LICENSE](https://www.doubao.com/chat/LICENSE))
+License: MIT ([LICENSE](LICENSE))
