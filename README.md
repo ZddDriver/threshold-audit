@@ -1,5 +1,7 @@
 # Threshold Audit
 
+[简体中文](README.zh-CN.md)
+
 A small, dependency-free Python component for **clean calibration → frozen threshold → held-out evaluation**. Useful for anomaly detectors, security scores and binary detection experiments. It does not train a model or claim a new statistical method.
 
 ## Quick start
